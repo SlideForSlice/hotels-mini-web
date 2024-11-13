@@ -1,13 +1,14 @@
 from sqlalchemy import Integer, Column, String, JSON
+from sqlalchemy.orm import Mapped, mapped_column
 
-from database import Base
+from app.database import Base
 
 class Hotels(Base):
     __tablename__ = "hotels"
 
-    id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
-    location = Column(String, nullable=False)
-    services = Column(JSON)
-    rooms_quantity = Column(Integer, nullable=False)
-    image_id = Column(Integer)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String, nullable=False)
+    location: Mapped[str] = mapped_column(String, nullable=False)
+    services: Mapped[dict] = mapped_column(JSON)
+    rooms_quantity: Mapped[int] = mapped_column(Integer, nullable=False)
+    image_id: Mapped[int | None] = mapped_column(Integer, nullable=True)

@@ -22,7 +22,7 @@ class HotelSearchArgs:
         self.stars = stars
 
 
-@app.get("/hotels")
+@app.get("hotels")
 def get_hotels(
         search_args: HotelSearchArgs = Depends(),
 ):
