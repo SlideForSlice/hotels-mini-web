@@ -2,6 +2,8 @@ from sqlalchemy import select, insert
 
 from app.database import async_session_maker
 from app.bookings.model import Bookings
+from app.users.model import Users
+
 
 class BaseDAO:
     model = None
@@ -9,9 +11,10 @@ class BaseDAO:
     @classmethod
     async def find_by_id(cls, model_id: int):
         async with async_session_maker() as session:
-            query = select(Bookings).filter_by(id=model_id)
+            query = select(cls.model).filter_by(id=model_id)
             result = await session.execute(query)
-            return result.scalar_one_or_none()
+            user = result.scalar_one_or_none()
+            return user
 
 
     @classmethod
