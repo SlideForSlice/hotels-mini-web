@@ -6,6 +6,6 @@ from app.database import Base
 class Users(Base):
     __tablename__ = "users"
 
-    id: Mapped[Integer] = mapped_column(Integer, primary_key=True)
+    id: Mapped[Integer] = mapped_column(Integer, primary_key=True, nullable=False)
     email: Mapped[String] = mapped_column(String, unique=True, nullable=False)
     hashed_password: Mapped[String] = mapped_column(String, nullable=False)
