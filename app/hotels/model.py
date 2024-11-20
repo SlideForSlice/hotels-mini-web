@@ -9,6 +9,6 @@ class Hotels(Base):
     id: Mapped[Integer] = mapped_column(Integer, primary_key=True)
     name: Mapped[String] = mapped_column(String, nullable=False)
     location: Mapped[String] = mapped_column(String, nullable=False)
-    services: Mapped[JSON] = mapped_column(JSON)
+    services: Mapped[dict | None] = mapped_column(JSON, nullable=True)
     rooms_quantity: Mapped[Integer] = mapped_column(Integer, nullable=False)
     image_id: Mapped[Integer | None] = mapped_column(Integer, nullable=True)

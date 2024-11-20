@@ -3,10 +3,10 @@ from types import NoneType
 
 from app.dao.base import BaseDAO
 from app.bookings.model import Bookings
-from sqlalchemy import delete, insert, select, and_, or_, func
+from sqlalchemy import insert, select, and_, or_, func
 
-from app.database import engine, async_session_maker
-from app.rooms.model import Rooms
+from app.database import async_session_maker
+from app.hotels.rooms.model import Rooms
 
 
 class BookingDAO(BaseDAO):
