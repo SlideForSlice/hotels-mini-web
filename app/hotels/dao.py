@@ -1,6 +1,7 @@
 from datetime import date
 from http.client import HTTPException
 from types import NoneType
+from typing import Optional
 
 from app.dao.base import BaseDAO
 from app.bookings.model import Bookings
@@ -20,7 +21,7 @@ class HotelsDAO(BaseDAO):
             name: str,
             location: str,
             rooms_quantity: int,
-            services: dict = None,
+            services: Optional[dict] = None,
     ):
         async with async_session_maker() as session:
 

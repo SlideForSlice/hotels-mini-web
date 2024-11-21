@@ -6,6 +6,7 @@ from app.bookings.model import Bookings
 from sqlalchemy import insert, select, and_, or_, func
 
 from app.database import async_session_maker
+from app.exceptions import *
 from app.hotels.rooms.model import Rooms
 
 
@@ -43,7 +44,7 @@ class BookingDAO(BaseDAO):
                 (Rooms.quantity - func.count(booked_rooms.c.room_id)).label("rooms_left")
             ).select_from(Rooms).join(
                 booked_rooms, booked_rooms.c.room_id == Rooms.id, isouter=True
-            ).where(room_id == Rooms.id).group_by(Rooms.quantity, booked_rooms.c.room_id)
+            ).where(Rooms.id == room_id).group_by(Rooms.quantity, booked_rooms.c.room_id)
 
             # print(get_rooms_left.compile(engine, compile_kwargs={"literal_binds": True}))
 

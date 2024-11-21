@@ -32,7 +32,7 @@ async def add_hotel(
         name: str,
         location: str,
         rooms_quantity: int,
-        services: dict = {}
+        services: dict = None
 ) -> SHotel:
     return await HotelsDAO.add(name, location, rooms_quantity, services)
 
@@ -44,7 +44,8 @@ async def add_services(
     updated_hotel = await HotelsDAO.update(id=hotel_id, services=services)
     if not updated_hotel:
         raise HotelAlreadyExistsException
-    return updated_hotel
+    else:
+        return updated_hotel
 
 
 @router.delete("/{hotel_id}")

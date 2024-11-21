@@ -10,21 +10,21 @@ class Exceptions(HTTPException):
         super().__init__(detail=self.detail, status_code=self.status_code)
 
 class UserAlreadyExistsException(Exceptions):
-    status_code=status.HTTP_409_CONFLICT,
+    status_code=status.HTTP_409_CONFLICT
     detail="User already exists"
 
 class IncorrectEmailOrPasswordException(Exceptions):
-    status_code=status.HTTP_401_UNAUTHORIZED,
+    status_code=status.HTTP_401_UNAUTHORIZED
     detail="Incorrect email or password"
 
 
 class TokenExpiredException(Exceptions):
-    status_code=status.HTTP_401_UNAUTHORIZED,
+    status_code=status.HTTP_401_UNAUTHORIZED
     detail='Token expired'
 
 
 class TokenAbsentException(Exceptions):
-    status_code=status.HTTP_401_UNAUTHORIZED,
+    status_code=status.HTTP_401_UNAUTHORIZED
     detail='Token is missing'
 
 
@@ -38,13 +38,25 @@ class UserIsNotPresentException(Exceptions):
 
 
 class RoomCanNotBeBookedException(Exceptions):
-    status_code=status.HTTP_409_CONFLICT,
+    status_code=status.HTTP_409_CONFLICT
     detail="We have no rooms left"
 
 class HotelAlreadyExistsException(Exceptions):
-    status_code=status.HTTP_409_CONFLICT,
+    status_code=status.HTTP_409_CONFLICT
     detail="Hotel already exists"
 
 class HotelIsNotPresentException(Exceptions):
     status_code=status.HTTP_404_NOT_FOUND
     detail="Hotel not found"
+
+class RoomIsNotPresentException(Exceptions):
+    status_code=status.HTTP_404_NOT_FOUND
+    detail="Room not found"
+
+class RoomAlreadyExistsException(Exceptions):
+    status_code=status.HTTP_409_CONFLICT,
+    detail="Room is already exists"
+
+class BookingIsNotPresentException(Exceptions):
+    status_code=status.HTTP_404_NOT_FOUND
+    detail="Booking num not found"
