@@ -1,16 +1,14 @@
 from datetime import date
-from http.client import HTTPException
-from types import NoneType
 from typing import Optional
 
 from app.dao.base import BaseDAO
 from app.bookings.model import Bookings
-from sqlalchemy import insert, select, and_, or_, func
+from sqlalchemy import select, and_, or_
 
 from app.database import async_session_maker
 from app.exceptions import HotelAlreadyExistsException
 from app.hotels.model import Hotels
-from app.hotels.rooms.model import Rooms
+from app.rooms.model import Rooms
 
 class HotelsDAO(BaseDAO):
     model = Hotels
@@ -37,6 +35,60 @@ class HotelsDAO(BaseDAO):
                 return new_hotel
             else:
                 raise HotelAlreadyExistsException
+
+    @classmethod
+    async def find_all(
+            cls,
+            location: str,
+            date_from: date,
+            date_to: date
+    ):
+        async with async_session_maker() as session:
+
+            # Запрос для поиска отелей по местоположению и свободным комнатам
+            query = select(Hotels).join(Rooms).outerjoin(Bookings).where(
+                and_(
+                    Hotels.location == location,
+                    and_(
+                        Bookings.date_from.is_(None),
+                        Bookings.date_to.is_(None),
+                        or_(
+                            Bookings.date_to <= date_from,
+                            Bookings.date_from >= date_to
+                        )
+                    )
+                )
+            )
+
+            result = await session.execute(query)
+            hotels = result.scalars().all()
+
+            return hotels
+
+    @classmethod
+    async def find_by_id_and_date(
+            cls,
+            hotel_id: int,
+            date_from: date,
+            date_to: date
+    ):
+        async with async_session_maker() as session:
+            # Получаем все комнаты отеля с указанным hotel_id
+            stmt = select(Rooms).where(
+                Rooms.hotel_id == hotel_id,
+                Rooms.id.notin_(select(Bookings.room_id).where(
+                    and_(
+                        Bookings.date_from < date_to,
+                        Bookings.date_to > date_from
+                    )
+                ))
+            )
+            result = await session.execute(stmt)
+            rooms = result.scalars().all()  # Получаем список свободных комнат
+
+            return rooms
+
+
 
 
 

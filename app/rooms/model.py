@@ -1,4 +1,4 @@
-from sqlalchemy import Integer, JSON, String, ForeignKey
+from sqlalchemy import Integer, JSON, String, ForeignKey,Boolean
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.sql.sqltypes import NullType
 from typing_extensions import Optional

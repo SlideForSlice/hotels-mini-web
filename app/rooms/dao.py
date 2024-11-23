@@ -1,16 +1,12 @@
-from datetime import date
-from http.client import HTTPException
-from types import NoneType
 from typing import Optional
 
 from app.dao.base import BaseDAO
-from app.bookings.model import Bookings
-from sqlalchemy import insert, select, and_, or_, func
+from sqlalchemy import select
 
 from app.database import async_session_maker
 from app.exceptions import *
 from app.hotels.model import Hotels
-from app.hotels.rooms.model import Rooms
+from app.rooms.model import Rooms
 
 class RoomsDAO(BaseDAO):
     model = Rooms

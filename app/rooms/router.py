@@ -1,17 +1,7 @@
-from datetime import date
-from typing import Optional
-
-from fastapi import APIRouter, Request, Depends, HTTPException
-from app.bookings.dao import BookingDAO
-from app.bookings.schemas import SBooking
+from fastapi import APIRouter
 from app.exceptions import *
-from app.hotels.dao import HotelsDAO
-from app.hotels.model import Hotels
-from app.hotels.rooms.dao import RoomsDAO
-from app.hotels.rooms.schemas import SRooms
-from app.hotels.schemas import SHotel
-from app.users.model import Users
-from app.users.dependencies import get_current_user
+from app.rooms.dao import RoomsDAO
+from app.rooms.schemas import SRooms
 
 router = APIRouter(
     prefix="/rooms",

@@ -19,9 +19,13 @@ router = APIRouter(
 async def get_hotels(location: str) -> list[SHotel]:
     return await HotelsDAO.find_all(location=location)
 
-@router.get("/{hotel_id}")
-async def get_hotel_by_id(hotel_id: int) -> SHotel:
-    result =  await HotelsDAO.find_by_id(hotel_id)
+@router.get("/{hotel_location}")
+async def find_by_name(
+        hotel_location: str,
+        date_from: date,
+        date_to: date
+) -> list[SHotel]:
+    result =  await HotelsDAO.find_all(hotel_location, date_from, date_to)
     if not result:
         raise HotelIsNotPresentException
     else:
@@ -35,6 +39,18 @@ async def add_hotel(
         services: dict = None
 ) -> SHotel:
     return await HotelsDAO.add(name, location, rooms_quantity, services)
+
+@router.get("/{hotel_id}/rooms")
+async def find_by_id(
+        hotel_id: int,
+        date_from: date,
+        date_to: date
+) -> list[SHotel]:
+    result =  await HotelsDAO.find_by_id_and_date(hotel_id, date_from, date_to)
+    if not result:
+        raise HotelIsNotPresentException
+    else:
+        return result
 
 @router.patch("/add_services/{hotel_id}")
 async def add_services(

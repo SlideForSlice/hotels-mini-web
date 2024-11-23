@@ -1,10 +1,9 @@
 from datetime import date
 
-from fastapi import APIRouter, Request, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from app.bookings.dao import BookingDAO
 from app.bookings.schemas import SBooking
 from app.exceptions import *
-from app.hotels.rooms.model import Rooms
 from app.users.model import Users
 from app.users.dependencies import get_current_user
 
