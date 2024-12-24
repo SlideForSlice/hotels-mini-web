@@ -49,7 +49,7 @@ class HotelsDAO(BaseDAO):
             query = select(Hotels).join(Rooms).outerjoin(Bookings).where(
                 and_(
                     Hotels.location == location,
-                    and_(
+                    or_(
                         Bookings.date_from.is_(None),
                         Bookings.date_to.is_(None),
                         or_(

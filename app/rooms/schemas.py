@@ -12,7 +12,7 @@ class SRooms(BaseModel):
     services: Optional[dict] = None
     quantity: int
     image_id: Optional[int] = None
-    is_available: bool
+
 
     class Config:
         from_attributes = True

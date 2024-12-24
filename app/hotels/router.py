@@ -1,6 +1,6 @@
-from datetime import date
+from datetime import date, datetime
 
-from fastapi import APIRouter, Request, Depends, HTTPException
+from fastapi import APIRouter, Request, Depends, HTTPException, Query
 from app.bookings.dao import BookingDAO
 from app.bookings.schemas import SBooking
 from app.exceptions import *
@@ -20,10 +20,10 @@ async def get_hotels(location: str) -> list[SHotel]:
     return await HotelsDAO.find_all(location=location)
 
 @router.get("/{hotel_location}")
-async def find_by_name(
+async def find_by_location_and_time(
         hotel_location: str,
-        date_from: date,
-        date_to: date
+        date_from: date = Query(..., description=f"Example, {datetime.now().date()}"),
+        date_to: date = Query(..., description=f"Example, {datetime.now().date()}")
 ) -> list[SHotel]:
     result =  await HotelsDAO.find_all(hotel_location, date_from, date_to)
     if not result:
