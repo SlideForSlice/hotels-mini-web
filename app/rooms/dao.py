@@ -1,12 +1,13 @@
 from typing import Optional
 
-from app.dao.base import BaseDAO
 from sqlalchemy import select
 
+from app.dao.base import BaseDAO
 from app.database import async_session_maker
 from app.exceptions import *
 from app.hotels.model import Hotels
 from app.rooms.model import Rooms
+
 
 class RoomsDAO(BaseDAO):
     model = Rooms

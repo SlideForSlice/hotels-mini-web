@@ -1,7 +1,7 @@
-from sqlalchemy import select, insert, update, delete
+from sqlalchemy import delete, insert, select, update
 
-from app.database import async_session_maker
 from app.bookings.model import Bookings
+from app.database import async_session_maker
 from app.users.model import Users
 
 

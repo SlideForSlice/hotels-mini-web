@@ -1,14 +1,15 @@
 from datetime import date
 from typing import Optional
 
-from app.dao.base import BaseDAO
-from app.bookings.model import Bookings
-from sqlalchemy import select, and_, or_
+from sqlalchemy import and_, or_, select
 
+from app.bookings.model import Bookings
+from app.dao.base import BaseDAO
 from app.database import async_session_maker
 from app.exceptions import HotelAlreadyExistsException
 from app.hotels.model import Hotels
 from app.rooms.model import Rooms
+
 
 class HotelsDAO(BaseDAO):
     model = Hotels

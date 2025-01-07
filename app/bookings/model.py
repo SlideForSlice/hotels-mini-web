@@ -1,7 +1,8 @@
-from sqlalchemy import Integer, ForeignKey, Date, Computed
+from sqlalchemy import Computed, Date, ForeignKey, Integer
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.database import Base
+
 
 class Bookings(Base):
     __tablename__ = "bookings"

@@ -1,4 +1,6 @@
 import os
+from datetime import datetime, timedelta, timezone
+
 from dotenv import load_dotenv
 from fastapi import HTTPException
 from jose import jwt
@@ -7,7 +9,6 @@ from pydantic import EmailStr
 
 from app.config import settings
 from app.users.dao import UsersDAO
-from datetime import datetime, timedelta, timezone
 
 load_dotenv()
 

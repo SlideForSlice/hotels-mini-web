@@ -1,7 +1,8 @@
-from sqlalchemy import Integer, Column, String, JSON
+from sqlalchemy import JSON, Column, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.database import Base
+
 
 class Hotels(Base):
     __tablename__ = "hotels"

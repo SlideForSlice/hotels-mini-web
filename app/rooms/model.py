@@ -1,9 +1,10 @@
-from sqlalchemy import Integer, JSON, String, ForeignKey,Boolean
+from sqlalchemy import JSON, Boolean, ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.sql.sqltypes import NullType
 from typing_extensions import Optional
 
 from app.database import Base
+
 
 class Rooms(Base):
     __tablename__ = "rooms"
